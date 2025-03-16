@@ -19,6 +19,7 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
-
+    <activity android:name=".Registro"  android:theme="@style/Theme.AppCompat.Light"/>
+    <activity android:name=".Pag1"  android:theme="@style/Theme.AppCompat.Light"/>
 </application>
     </manifest>
