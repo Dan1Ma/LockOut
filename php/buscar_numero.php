@@ -4,28 +4,36 @@ header("Content-Type: application/json");
 
 // Configuración de la base de datos
 $servername = "192.168.1.35";
-$username = "remote_user"; // Usuario por defecto de XAMPP
-$password = "your_password"; // Contraseña por defecto de XAMPP (vacía)
-$dbname = "lockout"; // Nombre de tu base de datos
+$username = "remote_user";
+$password = "your_password";
+$dbname = "lockout";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar conexión
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die(json_encode(["status" => "error", "message" => "Connection failed: " . $conn->connect_error]));
 }
 
 // Obtener el número de la solicitud GET
-$numero = $_GET['numero'];
+$numero = $_GET['numero'] ?? '';
+
+// Prevenir inyecciones SQL (buena práctica)
+$numero = $conn->real_escape_string($numero);
 
 // Buscar el número en la base de datos
-$sql = "SELECT * FROM numsospechoso WHERE numero = '$numero'";
+$sql = "SELECT numero, prefijo FROM numsospechoso WHERE numero = '$numero'";
 $result = $conn->query($sql);
 
 // Preparar la respuesta
 if ($result->num_rows > 0) {
-    echo json_encode(["status" => "found"]);
+    $row = $result->fetch_assoc();
+    echo json_encode([
+        "status" => "found",
+        "numero" => $row['numero'],
+        "prefijo" => $row['prefijo']
+    ]);
 } else {
     echo json_encode(["status" => "not_found"]);
 }
