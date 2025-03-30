@@ -20,6 +20,11 @@ class Pag1 : AppCompatActivity() {
     // Cliente HTTP
     val client = OkHttpClient()
 
+
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pag1)
