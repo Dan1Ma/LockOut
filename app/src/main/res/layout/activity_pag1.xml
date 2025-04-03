@@ -1,44 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/etPrefijo"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:padding="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:hint="Prefijo (ej: +34)"
         android:inputType="phone"
-        android:layout_marginBottom="8dp"/>
+        android:minHeight="48dp"
+        android:padding="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/etNumero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etNumero"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:minHeight="48dp"
-        android:padding="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="17dp"
         android:hint="Número de teléfono"
         android:inputType="phone"
-        android:layout_marginBottom="16dp"/>
+        android:minHeight="48dp"
+        android:padding="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnBuscar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPrefijo" />
 
     <Button
         android:id="@+id/btnBuscar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:minHeight="48dp"
         android:padding="12dp"
         android:text="Buscar"
-        android:layout_marginBottom="16dp"/>
+        app:layout_constraintBottom_toTopOf="@+id/tvResultado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNumero" />
 
     <TextView
         android:id="@+id/tvResultado"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Resultado aparecerá aquí"
         android:textSize="16sp"
-        android:layout_marginTop="8dp"/>
-</LinearLayout>
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Eliminamos el ConstraintLayout innecesario que no contiene elementos -->
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?android:attr/windowBackground"
+        android:padding="8dp"
+        app:itemIconTint="@color/nav_tint"
+        app:itemTextColor="@color/nav_tint"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
