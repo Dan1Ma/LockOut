@@ -51,10 +51,6 @@ class Pag1 : AppCompatActivity() {
                     Toast.makeText(this, "Reportar seleccionado", Toast.LENGTH_SHORT).show()
                     true
                 }
-                R.id.nav_configuracion -> {
-                    Toast.makeText(this, "Configuración seleccionada", Toast.LENGTH_SHORT).show()
-                    true
-                }
                 R.id.nav_estafas_comunes -> {
                     Toast.makeText(this, "Estafas Comunes seleccionada", Toast.LENGTH_SHORT).show()
                     true
