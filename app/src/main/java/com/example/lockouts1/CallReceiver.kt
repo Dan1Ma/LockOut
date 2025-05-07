@@ -15,10 +15,11 @@ class CallReceiver : BroadcastReceiver() {
         if (state == TelephonyManager.EXTRA_STATE_RINGING && incomingNumber != null) {
             Log.d("CallReceiver", "Llamada entrante: $incomingNumber")
 
-            // Simulación de número sospechoso
-            if (incomingNumber == "613929030") {
+            val cleanNumber = incomingNumber.replace("\\D".toRegex(), "") // quita +, espacios, guiones
+            if (cleanNumber.endsWith("613929030")) {
                 NotificationHelper.showNotification(context, incomingNumber)
             }
+
         }
     }
 }

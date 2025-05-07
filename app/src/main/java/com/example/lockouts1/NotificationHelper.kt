@@ -42,5 +42,7 @@ object NotificationHelper {
             .setContentIntent(pendingIntent)
 
         notificationManager.notify(NOTIF_ID, builder.build())
+
+
     }
 }
