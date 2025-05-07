@@ -5,15 +5,15 @@
         android:icon="@drawable/home_24px"
         android:title="Inicio" />
     <item
-        android:id="@+id/nav_busquedas"
+        android:id="@+id/nav_reportar"
         android:icon="@drawable/report_24px"
         android:title="Reportar" />
     <item
-        android:id="@+id/nav_reportar"
+        android:id="@+id/nav_registro"
         android:icon="@drawable/person_add_24px"
         android:title="Registro" />
     <item
-        android:id="@+id/nav_estafas_comunes"
+        android:id="@+id/nav_perfil"
         android:icon="@drawable/settings_24px"
         android:title="Perfil" />
 </menu>

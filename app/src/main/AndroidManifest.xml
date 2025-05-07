@@ -21,5 +21,7 @@
         </activity>
         <activity android:name=".Registro"  android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".Pag1"  android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".Reportar"  android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".Perfil"  android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 </manifest>

@@ -11,6 +11,7 @@ import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.content.Intent
 
 
 class Pag1 : AppCompatActivity() {
@@ -40,19 +41,22 @@ class Pag1 : AppCompatActivity() {
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_inicio -> {
-                    Toast.makeText(this, "Inicio seleccionado", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.nav_busquedas -> {
-                    Toast.makeText(this, "Búsquedas seleccionado", Toast.LENGTH_SHORT).show()
+                    // Ya estamos en Pag1, no hacer nada
                     true
                 }
                 R.id.nav_reportar -> {
-                    Toast.makeText(this, "Reportar seleccionado", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, Reportar::class.java)
+                    startActivity(intent)
                     true
                 }
-                R.id.nav_estafas_comunes -> {
-                    Toast.makeText(this, "Estafas Comunes seleccionada", Toast.LENGTH_SHORT).show()
+                R.id.nav_registro -> {
+                    val intent = Intent(this, Registro::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.nav_perfil -> {
+                    val intent = Intent(this, Perfil::class.java)
+                    startActivity(intent)
                     true
                 }
                 else -> false
