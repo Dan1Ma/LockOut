@@ -46,7 +46,7 @@ class Reportar : AppCompatActivity() {
 
         searchButton.setOnClickListener {
             val phoneNumber = phoneInput.text.toString().trim()
-            Toast.makeText(this, "Buscando: $phoneNumber", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Numero Reportado: $phoneNumber", Toast.LENGTH_SHORT).show()
             // Aquí puedes llamar a tu función de búsqueda, API, etc.
         }
     }
