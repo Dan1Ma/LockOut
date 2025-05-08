@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "618923492749",
+    "project_id": "lockout-fad67",
+    "storage_bucket": "lockout-fad67.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618923492749:android:559abfb16a4889cbbbe9c4",
+        "android_client_info": {
+          "package_name": "com.example.lockouts1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiIeNHwF_QH29Z7a6uMm6XrIxzjo3wViQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
