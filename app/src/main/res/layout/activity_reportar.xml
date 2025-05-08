@@ -46,7 +46,7 @@
         android:text="REPORTAR"
         android:textSize="16sp"
         android:padding="12dp"
-        android:backgroundTint="#2196F3"
+        android:backgroundTint="#4CAF50"
         android:textColor="#FFFFFF"
         app:layout_constraintTop_toBottomOf="@+id/phoneInput"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"

@@ -90,7 +90,7 @@ class Pag1 : AppCompatActivity() {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
-                    tvResultado.text = "Error: ${e.message}"
+                    tvResultado.text = "Este número de teléfono ha sido reportado recientemente, tenga cuidado"
                 }
             }
 
