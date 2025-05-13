@@ -24,6 +24,13 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.Manifest
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+import java.io.IOException
+
+
 
 
 class MainActivity : ComponentActivity() {
@@ -73,9 +80,48 @@ class MainActivity : ComponentActivity() {
             if (nombre.isEmpty() || contrasena.isEmpty()) {
                 Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, Pag1::class.java)
-                startActivity(intent)
+                val client = OkHttpClient()
+
+                val json = """
+    {
+        "nombre": "$nombre",
+        "contrasena": "$contrasena"
+    }
+""".trimIndent()
+
+                val requestBody = RequestBody.create(
+                    "application/json; charset=utf-8".toMediaTypeOrNull(), json
+                )
+
+                val request = Request.Builder()
+                    .url("https://backendlockout.onrender.com/login") // 🔁 tu URL real aquí
+                    .post(requestBody)
+                    .build()
+
+                client.newCall(request).enqueue(object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        runOnUiThread {
+                            Toast.makeText(this@MainActivity, "Error de red", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        val respuesta = response.body?.string()
+                        val jsonResponse = JSONObject(respuesta)
+                        val success = jsonResponse.getBoolean("success")
+                        val message = jsonResponse.getString("message")
+
+                        runOnUiThread {
+                            if (success) {
+                                Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this@MainActivity, Pag1::class.java))
+                            } else {
+                                Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                })
+
                 // Aquí vamos a agregar la lógica para validar el inicio de sesión con una base de datos
             }
         }

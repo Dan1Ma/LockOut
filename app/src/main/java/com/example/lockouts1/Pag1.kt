@@ -81,7 +81,9 @@ class Pag1 : AppCompatActivity() {
 
     // Función para llamar a la API (sin cambios)
     fun buscarNumero(prefijo: String, numero: String) {
-        val url = "http://10.0.2.2/buscar_numeros/buscar_numero.php?prefijo=$prefijo&numero=$numero"
+        val numeroCompleto = "$prefijo$numero"
+        val url = "https://backendlockout.onrender.com/buscar-numero?numero=$numeroCompleto"
+
 
         val request = Request.Builder()
             .url(url)
@@ -99,13 +101,30 @@ class Pag1 : AppCompatActivity() {
                 runOnUiThread {
                     try {
                         val json = JSONObject(responseData)
-                        val estatus = json.getString("estatus")
-                        tvResultado.text = "Estatus: $estatus"
+                        val success = json.getBoolean("success")
+                        if (success) {
+                            val datos = json.getJSONObject("datos")
+                            val tipo = datos.getString("tipo_telefono")
+                            val ubicacion = datos.getString("ubicacion")
+                            val descripcion = datos.getString("descripcion")
+                            val reportes = datos.getInt("numero_reportes")
+
+                            tvResultado.text = """
+                                Tipo: $tipo
+                                Ubicación: $ubicacion
+                                Descripción: $descripcion
+                                Nº de Reportes: $reportes
+                            """.trimIndent()
+                        } else {
+                            val mensaje = json.getString("message")
+                            tvResultado.text = "No encontrado: $mensaje"
+                        }
                     } catch (e: Exception) {
                         tvResultado.text = "Respuesta inesperada: $responseData"
                     }
                 }
             }
+
         })
     }
 }

@@ -12,6 +12,11 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+import java.io.IOException
 
 class Registro : AppCompatActivity() {
 
@@ -69,10 +74,48 @@ class Registro : AppCompatActivity() {
             } else if (contrasena != repetirContrasena) {
                 Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
+                val client = OkHttpClient()
+
+                val json = """
+    {
+        "nombre": "$nombre",
+        "correo": "$correo",
+        "fechaNacimiento": "$fechaNacimiento",
+        "contrasena": "$contrasena"
+    }
+""".trimIndent()
+
+                val requestBody = RequestBody.create(
+                    "application/json; charset=utf-8".toMediaTypeOrNull(), json
+                )
+
+                val request = Request.Builder()
+                    .url("https://backendlockout.onrender.com/registro") // 🔁 tu URL real aquí
+                    .post(requestBody)
+                    .build()
+
+                client.newCall(request).enqueue(object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        runOnUiThread {
+                            Toast.makeText(this@Registro, "Error de red", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        val respuesta = response.body?.string()
+                        val success = JSONObject(respuesta).getBoolean("success")
+                        runOnUiThread {
+                            if (success) {
+                                Toast.makeText(this@Registro, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this@Registro, MainActivity::class.java))
+                                finish()
+                            } else {
+                                Toast.makeText(this@Registro, "Error al registrar", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                })
+
             }
         }
 
