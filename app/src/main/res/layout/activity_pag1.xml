@@ -3,101 +3,87 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA"
-    android:orientation="vertical">
+    android:background="#FAFAFA">
 
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
+    <!-- Contenedor centrado -->
+    <LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Buscar Número"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        android:padding="16dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/etPrefijo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Campo prefijo -->
-    <EditText
-        android:id="@+id/etPrefijo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Prefijo (ej: +34)"
-        android:inputType="phone"
-        android:minHeight="48dp"
-        android:padding="10dp"
-        android:background="@drawable/rounded_edit_text"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/etNumero"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="0dp" />
+        app:layout_constraintVertical_bias="0.5">
 
-    <!-- Campo número -->
-    <EditText
-        android:id="@+id/etNumero"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Número de teléfono"
-        android:inputType="phone"
-        android:minHeight="48dp"
-        android:padding="10dp"
-        android:background="@drawable/rounded_edit_text"
-        app:layout_constraintTop_toBottomOf="@id/etPrefijo"
-        app:layout_constraintBottom_toTopOf="@id/btnBuscar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="0dp" />
+        <!-- Título -->
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buscar Número"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp" />
 
+        <!-- Campo prefijo -->
+        <EditText
+            android:id="@+id/etPrefijo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Prefijo (ej: +34)"
+            android:inputType="phone"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:background="@drawable/rounded_edit_text"
+            android:layout_marginBottom="12dp"
+            android:textColor="#000000"
+            android:textSize="16sp" />
 
+        <!-- Campo número -->
+        <EditText
+            android:id="@+id/etNumero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Número de teléfono"
+            android:inputType="phone"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:background="@drawable/rounded_edit_text"
+            android:layout_marginBottom="16dp"
+            android:textColor="#000000"
+            android:textSize="16sp" />
 
-    <!-- Botón buscar -->
-    <Button
-        android:id="@+id/btnBuscar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
-        android:minHeight="48dp"
-        android:padding="10dp"
-        android:text="Buscar"
-        android:backgroundTint="#4CAF50"
-        android:textColor="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/etNumero"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tvResultado" />
+        <!-- Botón buscar -->
+        <Button
+            android:id="@+id/btnBuscar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buscar"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#4CAF50"
+            android:minHeight="48dp"
+            android:padding="10dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="16sp" />
 
-    <!-- Resultado -->
-    <TextView
-        android:id="@+id/tvResultado"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
-        android:padding="10dp"
-        android:text="Resultado aparecerá aquí"
-        android:textSize="16sp"
-        android:textColor="#000000"
-        android:background="#EEEEEE"
-        app:layout_constraintTop_toBottomOf="@id/btnBuscar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView" />
+        <!-- Resultado -->
+        <TextView
+            android:id="@+id/tvResultado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Resultado aparecerá aquí"
+            android:textSize="16sp"
+            android:textColor="#000000"
+            android:background="#EEEEEE"
+            android:layout_marginBottom="8dp" />
+    </LinearLayout>
 
     <!-- Menú inferior -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -113,4 +99,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
