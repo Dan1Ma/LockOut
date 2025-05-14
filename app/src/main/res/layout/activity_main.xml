@@ -32,7 +32,7 @@
         android:id="@+id/editTextNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre"
+        android:hint="Correo"
         android:inputType="textPersonName"
         android:padding="12dp"
         android:background="@android:drawable/edit_text"
@@ -58,7 +58,7 @@
         android:backgroundTint="#4CAF50"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="16dp"/>
-    
+
     <com.google.android.gms.common.SignInButton
         android:id="@+id/googleSignInButton"
         android:layout_width="wrap_content"

@@ -107,17 +107,17 @@ class MainActivity : ComponentActivity() {
 
         // Acción del botón "Iniciar Sesión"
         buttonIniciarSesion.setOnClickListener {
-            val nombre = editTextNombre.text.toString()
+            val correo = editTextNombre.text.toString()
             val contrasena = editTextContrasena.text.toString()
 
-            if (nombre.isEmpty() || contrasena.isEmpty()) {
+            if (correo.isEmpty() || contrasena.isEmpty()) {
                 Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
             } else {
                 val client = OkHttpClient()
 
                 val json = """
     {
-        "nombre": "$nombre",
+        "correo": "$correo",
         "contrasena": "$contrasena"
     }
 """.trimIndent()
