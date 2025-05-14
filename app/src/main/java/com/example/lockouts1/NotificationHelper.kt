@@ -14,35 +14,28 @@ object NotificationHelper {
     private const val CHANNEL_NAME = "Alerta de Estafa"
     private const val NOTIF_ID = 101
 
-    fun showNotification(context: Context, phoneNumber: String) {
-        val notificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    fun showNotification(context: Context, titulo: String, mensaje: String) {
+        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+        val channelId = "alert_channel"
 
-        // Crear canal si es necesario (Android 8+)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                CHANNEL_ID,
-                CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_HIGH
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val channel = android.app.NotificationChannel(
+                channelId,
+                "Alertas de llamadas",
+                android.app.NotificationManager.IMPORTANCE_HIGH
             )
             notificationManager.createNotificationChannel(channel)
         }
 
-        val intent = Intent(context, MainActivity::class.java)
-        val pendingIntent = PendingIntent.getActivity(
-            context, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-        )
-
-        val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(android.R.drawable.ic_dialog_alert)
-            .setContentTitle("Llamada sospechosa detectada")
-            .setContentText("El número $phoneNumber podría ser una estafa.")
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
+        val notification = androidx.core.app.NotificationCompat.Builder(context, channelId)
+            .setSmallIcon(R.drawable.ic_alerta)
+            .setContentTitle(titulo)
+            .setContentText(mensaje)
+            .setPriority(androidx.core.app.NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)
-            .setContentIntent(pendingIntent)
+            .build()
 
-        notificationManager.notify(NOTIF_ID, builder.build())
-
-
+        notificationManager.notify(1, notification)
     }
+
 }
