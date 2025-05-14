@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        // ✅ Solicitar permiso para READ_CALL_LOG en tiempo de ejecución
+        // Solicitar permiso para READ_CALL_LOG en tiempo de ejecución
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG)
             != PackageManager.PERMISSION_GRANTED
         ) {
@@ -82,7 +82,7 @@ class MainActivity : ComponentActivity() {
         }
 
 
-        // ✅ Pedir permiso de notificaciones en Android 13+
+        // Pedir permiso de notificaciones en Android 13+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(
                     this,
@@ -155,7 +155,7 @@ class MainActivity : ComponentActivity() {
                     }
                 })
 
-                // Aquí vamos a agregar la lógica para validar el inicio de sesión con una base de datos
+
             }
         }
 
@@ -211,7 +211,7 @@ class MainActivity : ComponentActivity() {
                             runOnUiThread {
                                 Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
 
-                                // 👉 Aquí pasamos a Pag1 cuando el backend responde
+                                // Aquí pasamos a Pag1 cuando el backend responde
                                 val intent = Intent(this@MainActivity, Pag1::class.java)
                                 startActivity(intent)
                                 finish()

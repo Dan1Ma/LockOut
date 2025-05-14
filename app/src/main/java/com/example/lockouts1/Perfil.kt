@@ -33,7 +33,7 @@ class Perfil : AppCompatActivity() {
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion)
 
 
-        // Simulación: precarga de datos de usuario (puedes cargar desde Firebase o SharedPreferences)
+
         nombreInput.setText("Daniel")
         correoInput.setText("danieldpmatm@gmail.com")
         fechaInput.setText("2025-05-14")
@@ -78,7 +78,7 @@ class Perfil : AppCompatActivity() {
             })
         }
         btnCerrarSesion.setOnClickListener {
-            // Si estás usando Firebase para login con Google, también puedes hacer FirebaseAuth.getInstance().signOut()
+
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)

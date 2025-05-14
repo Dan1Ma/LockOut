@@ -45,7 +45,7 @@ class Reportar : AppCompatActivity() {
             }
         }
 
-// Opcional: seleccionar "Reportar" como ítem activo por defecto
+
         bottomNavigation.selectedItemId = R.id.nav_reportar
 
 

@@ -41,7 +41,7 @@ class Pag1 : AppCompatActivity() {
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_inicio -> {
-                    // Ya estamos en Pag1, no hacer nada
+
                     true
                 }
                 R.id.nav_reportar -> {
@@ -79,7 +79,7 @@ class Pag1 : AppCompatActivity() {
         }
     }
 
-    // Función para llamar a la API (sin cambios)
+    // Función para llamar a la API
     fun buscarNumero(prefijo: String, numero: String) {
         val numeroCompleto = "$prefijo$numero"
         val url = "https://backendlockout.onrender.com/buscar-numero?numero=$numeroCompleto"
