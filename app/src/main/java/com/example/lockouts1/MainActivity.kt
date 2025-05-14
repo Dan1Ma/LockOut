@@ -177,15 +177,52 @@ class MainActivity : ComponentActivity() {
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val user = firebaseAuth.currentUser
-                    Toast.makeText(this, "Bienvenido, ${user?.displayName}", Toast.LENGTH_LONG).show()
-                    val intent = Intent(this, Pag1::class.java)
-                    startActivity(intent)
-                    finish()
+                    val user = firebaseAuth.currentUser ?: return@addOnCompleteListener
+
+                    val nombre = user.displayName ?: "Sin nombre"
+                    val correo = user.email ?: return@addOnCompleteListener
+
+                    val json = """
+                {
+                    "nombre": "$nombre",
+                    "correo": "$correo"
+                }
+            """.trimIndent()
+
+                    val requestBody = json.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+
+                    val request = Request.Builder()
+                        .url("https://backendlockout.onrender.com/google-login") // URL de tu backend
+                        .post(requestBody)
+                        .build()
+
+                    OkHttpClient().newCall(request).enqueue(object : Callback {
+                        override fun onFailure(call: Call, e: IOException) {
+                            runOnUiThread {
+                                Toast.makeText(this@MainActivity, "Error de red con backend", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                        override fun onResponse(call: Call, response: Response) {
+                            val body = response.body?.string()
+                            val jsonRes = JSONObject(body)
+                            val message = jsonRes.getString("message")
+
+                            runOnUiThread {
+                                Toast.makeText(this@MainActivity, message, Toast.LENGTH_SHORT).show()
+
+                                // 👉 Aquí pasamos a Pag1 cuando el backend responde
+                                val intent = Intent(this@MainActivity, Pag1::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                        }
+                    })
                 } else {
-                    Toast.makeText(this, "Autenticación fallida", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Autenticación fallida con Google", Toast.LENGTH_SHORT).show()
                 }
             }
+
     }
 
 

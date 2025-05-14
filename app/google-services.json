@@ -12,7 +12,20 @@
           "package_name": "com.example.lockouts1"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "618923492749-rcbgneohennjbif3bt1s8bhjs1qibt49.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.lockouts1",
+            "certificate_hash": "667c06e87b3ce0b7b587398445adfb07a819c16b"
+          }
+        },
+        {
+          "client_id": "618923492749-ffb0p75mnq0pivurbijihli492p2f3pi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDiIeNHwF_QH29Z7a6uMm6XrIxzjo3wViQ"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "618923492749-ffb0p75mnq0pivurbijihli492p2f3pi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
