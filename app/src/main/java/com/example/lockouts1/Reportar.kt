@@ -96,7 +96,7 @@ class Reportar : AppCompatActivity() {
 
                         runOnUiThread {
                             Toast.makeText(this@Reportar, message, Toast.LENGTH_SHORT).show()
-                            if (success) finish()
+
                         }
                     }
                 })
