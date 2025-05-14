@@ -89,8 +89,8 @@ class Perfil : AppCompatActivity() {
                     startActivity(Intent(this, Reportar::class.java))
                     true
                 }
-                R.id.nav_registro -> {
-                    startActivity(Intent(this, Registro::class.java))
+                R.id.nav_alertas -> {
+                    startActivity(Intent(this, Noticias::class.java))
                     true
                 }
                 R.id.nav_perfil -> true

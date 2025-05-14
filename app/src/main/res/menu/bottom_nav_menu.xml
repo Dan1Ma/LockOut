@@ -9,11 +9,11 @@
         android:icon="@drawable/report_24px"
         android:title="Reportar" />
     <item
-        android:id="@+id/nav_registro"
-        android:icon="@drawable/person_add_24px"
-        android:title="Registro" />
+        android:id="@+id/nav_alertas"
+        android:icon="@drawable/ic_alerta"
+            android:title="Alertas" />
     <item
         android:id="@+id/nav_perfil"
-        android:icon="@drawable/settings_24px"
+        android:icon="@drawable/ic_perfil"
         android:title="Perfil" />
 </menu>

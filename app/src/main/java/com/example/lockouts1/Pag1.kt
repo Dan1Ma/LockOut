@@ -49,8 +49,8 @@ class Pag1 : AppCompatActivity() {
                     startActivity(intent)
                     true
                 }
-                R.id.nav_registro -> {
-                    val intent = Intent(this, Registro::class.java)
+                R.id.nav_alertas -> {
+                    val intent = Intent(this, Noticias::class.java)
                     startActivity(intent)
                     true
                 }
