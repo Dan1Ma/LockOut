@@ -19,6 +19,7 @@ class Perfil : AppCompatActivity() {
     private lateinit var correoInput: EditText
     private lateinit var fechaInput: EditText
     private lateinit var guardarButton: Button
+    private lateinit var btnCerrarSesion: Button
     private val client = OkHttpClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +30,8 @@ class Perfil : AppCompatActivity() {
         correoInput = findViewById(R.id.editTextCorreoPerfil)
         fechaInput = findViewById(R.id.editTextFechaPerfil)
         guardarButton = findViewById(R.id.buttonGuardarCambios)
+        btnCerrarSesion = findViewById(R.id.btnCerrarSesion)
+
 
         // Simulación: precarga de datos de usuario (puedes cargar desde Firebase o SharedPreferences)
         nombreInput.setText("Daniel")
@@ -73,6 +76,13 @@ class Perfil : AppCompatActivity() {
                     }
                 }
             })
+        }
+        btnCerrarSesion.setOnClickListener {
+            // Si estás usando Firebase para login con Google, también puedes hacer FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
         }
 
         // Navegación inferior
