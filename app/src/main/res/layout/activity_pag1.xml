@@ -36,7 +36,7 @@
             android:id="@+id/etPrefijo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Prefijo (ej: +34)"
+            android:hint="Prefijo (ej: 34)"
             android:inputType="phone"
             android:minHeight="48dp"
             android:padding="10dp"
