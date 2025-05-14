@@ -77,7 +77,7 @@ class Reportar : AppCompatActivity() {
                 val requestBody = json.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
 
                 val request = Request.Builder()
-                    .url("https://<TU_BACKEND>.onrender.com/reportar") // 🔁 PON tu URL de Render
+                    .url("https://backendlockout.onrender.com/reportar") // 🔁 PON tu URL de Render
                     .post(requestBody)
                     .build()
 
