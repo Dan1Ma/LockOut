@@ -24,6 +24,12 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.Manifest
+import androidx.activity.result.contract.ActivityResultContracts
+import com.google.android.gms.auth.api.signin.*
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.SignInButton
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.*
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -34,9 +40,35 @@ import java.io.IOException
 
 
 class MainActivity : ComponentActivity() {
+    private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var firebaseAuth: FirebaseAuth
+
+    // Lanzador del intent de Google Sign-In
+    private val googleSignInLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+        try {
+            val account = task.getResult(ApiException::class.java)
+            firebaseAuthWithGoogle(account.idToken!!)
+        } catch (e: ApiException) {
+            Toast.makeText(this, "Error al iniciar sesión con Google", Toast.LENGTH_SHORT).show()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Inicializar Firebase Auth
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        // Configurar Google Sign-In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id)) // debe estar en strings.xml
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         // ✅ Solicitar permiso para READ_CALL_LOG en tiempo de ejecución
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG)
@@ -71,6 +103,7 @@ class MainActivity : ComponentActivity() {
         val editTextContrasena = findViewById<EditText>(R.id.editTextContrasena)
         val buttonIniciarSesion = findViewById<Button>(R.id.buttonIniciarSesion)
         val buttonRegistro = findViewById<Button>(R.id.buttonRegistro)
+        val googleButton = findViewById<SignInButton>(R.id.googleSignInButton)
 
         // Acción del botón "Iniciar Sesión"
         buttonIniciarSesion.setOnClickListener {
@@ -131,6 +164,36 @@ class MainActivity : ComponentActivity() {
             val intent = Intent(this, Registro::class.java)
             startActivity(intent)
         }
+        // Registro con Google
+        googleButton.setOnClickListener {
+            val signInIntent = googleSignInClient.signInIntent
+            googleSignInLauncher.launch(signInIntent)
+        }
     }
+
+    // Función que autentica en Firebase con Google
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        firebaseAuth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val user = firebaseAuth.currentUser
+                    Toast.makeText(this, "Bienvenido, ${user?.displayName}", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this, Pag1::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(this, "Autenticación fallida", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+
+
+
+
+
+
+
 
 }

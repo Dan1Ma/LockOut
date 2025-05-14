@@ -58,6 +58,13 @@
         android:backgroundTint="#4CAF50"
         android:textColor="#FFFFFF"
         android:layout_marginBottom="16dp"/>
+    
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/googleSignInButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp" />
 
     <!-- Texto "¿No tienes cuenta aún?" -->
     <TextView
@@ -76,6 +83,7 @@
         android:text="Registrarse"
         android:backgroundTint="#2196F3"
         android:textColor="#FFFFFF"/>
+
 
 
 </LinearLayout>

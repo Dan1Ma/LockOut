@@ -20,36 +20,10 @@ import java.io.IOException
 
 class Registro : AppCompatActivity() {
 
-    private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var firebaseAuth: FirebaseAuth
-
-    // Lanzador del intent de Google Sign-In
-    private val googleSignInLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-        try {
-            val account = task.getResult(ApiException::class.java)
-            firebaseAuthWithGoogle(account.idToken!!)
-        } catch (e: ApiException) {
-            Toast.makeText(this, "Error al iniciar sesión con Google", Toast.LENGTH_SHORT).show()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
-
-        // Inicializar Firebase Auth
-        firebaseAuth = FirebaseAuth.getInstance()
-
-        // Configurar Google Sign-In
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id)) // debe estar en strings.xml
-            .requestEmail()
-            .build()
-
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         // Referencias a vistas
         val editTextNombre = findViewById<EditText>(R.id.editTextNombreRegistro)
@@ -58,7 +32,7 @@ class Registro : AppCompatActivity() {
         val editTextContrasena = findViewById<EditText>(R.id.editTextContrasenaRegistro)
         val editTextRepetirContrasena = findViewById<EditText>(R.id.editTextRepetirContrasena)
         val buttonCrearCuenta = findViewById<Button>(R.id.buttonCrearCuenta)
-        val googleButton = findViewById<SignInButton>(R.id.googleSignInButton)
+
 
         // Registro manual
         buttonCrearCuenta.setOnClickListener {
@@ -119,27 +93,8 @@ class Registro : AppCompatActivity() {
             }
         }
 
-        // Registro con Google
-        googleButton.setOnClickListener {
-            val signInIntent = googleSignInClient.signInIntent
-            googleSignInLauncher.launch(signInIntent)
-        }
+
     }
 
-    // Función que autentica en Firebase con Google
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        firebaseAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user = firebaseAuth.currentUser
-                    Toast.makeText(this, "Bienvenido, ${user?.displayName}", Toast.LENGTH_LONG).show()
-                    val intent = Intent(this, Pag1::class.java)
-                    startActivity(intent)
-                    finish()
-                } else {
-                    Toast.makeText(this, "Autenticación fallida", Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
+
 }
