@@ -32,8 +32,8 @@ class Perfil : AppCompatActivity() {
 
         // Simulación: precarga de datos de usuario (puedes cargar desde Firebase o SharedPreferences)
         nombreInput.setText("Daniel")
-        correoInput.setText("daniel@example.com")
-        fechaInput.setText("1995-05-01")
+        correoInput.setText("danieldpmatm@gmail.com")
+        fechaInput.setText("2025-05-14")
 
         guardarButton.setOnClickListener {
             val nombre = nombreInput.text.toString()
